@@ -50,10 +50,12 @@ ol.batons{list-style:none;margin:0;padding:0;border-top:1px solid var(--ink)}
 .map h2{font:600 1rem var(--serif);margin:0 0 .75rem}
 .map img{display:block;width:100%;max-width:34rem;height:auto;border:1px solid var(--rule);background:#fff}
 .map figcaption{margin-top:.6rem;font-size:.82rem;color:var(--muted);max-width:34rem}
+.source{margin:.75rem 0 0;font-size:.8rem;color:var(--muted)}
 .note{margin-top:3rem;max-width:36rem;font-size:.9rem;color:var(--muted)}
 .note h2{font:600 1rem var(--serif);color:var(--ink);margin:0 0 .5rem}
 .note p{margin:.5rem 0}
 footer{margin-top:2.5rem;padding-top:1rem;border-top:1px solid var(--rule);font-size:.8rem;color:var(--muted)}
+footer p{margin:.25rem 0}
 
 @media (max-width:540px){
   .wrap{padding-top:2.5rem}
@@ -82,6 +84,7 @@ footer{margin-top:2.5rem;padding-top:1rem;border-top:1px solid var(--rule);font-
     <button type="button" data-sort="distance" aria-pressed="false">Shortest first</button>
   </div>
   <ol class="batons" id="list"></ol>
+  <p class="source">Distance and elevation figures are calculated from Garmin Connect course exports.</p>
 
   <figure class="map">
     <h2>Route map</h2>
@@ -96,7 +99,10 @@ footer{margin-top:2.5rem;padding-top:1rem;border-top:1px solid var(--rule);font-
   </section>
 </main>
 
-<footer>Route data from the 12 Garmin Connect GPX exports.</footer>
+<footer>
+  <p>Built by <a href="https://www.linkedin.com/in/kzleong/" target="_blank" rel="noopener">Kai Zhe Leong</a>, with Claude, an AI assistant made by Anthropic.</p>
+  <p id="visits" hidden></p>
+</footer>
 </div>
 
 <script>
@@ -157,6 +163,26 @@ document.querySelectorAll('.sort button').forEach(b => b.addEventListener('click
   render();
 }));
 render();
+
+/* Visit counter (GoatCounter). Leave GOATCOUNTER_CODE empty to switch it off.
+   Set it to your site code, e.g. 'ritr' for https://ritr.goatcounter.com. See README. */
+const GOATCOUNTER_CODE = 'kzleong';
+if (GOATCOUNTER_CODE) {
+  const base = 'https://' + GOATCOUNTER_CODE + '.goatcounter.com';
+  const tag = document.createElement('script');
+  tag.async = true;
+  tag.src = 'https://gc.zgo.at/count.js';
+  tag.dataset.goatcounter = base + '/count';
+  document.head.appendChild(tag);
+  fetch(base + '/counter/TOTAL.json')
+    .then(r => r.ok ? r.json() : Promise.reject())
+    .then(d => {
+      const el = document.getElementById('visits');
+      el.textContent = d.count + ' page views';
+      el.hidden = false;
+    })
+    .catch(() => {});
+}
 </script>
 </body>
 </html>

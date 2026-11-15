@@ -68,7 +68,19 @@ The route data comes from 12 Garmin Connect GPX exports, which are not stored in
 
 The distances printed on the official map are rounded figures for each leg and do not always match the Garmin courses. Most legs agree within about 0.15 km, but batons 8 and 9 differ by more (the map shows 7.16 km and 5.69 km, the Garmin courses 7.86 km and 5.11 km). Worth confirming against the course you actually plan to run.
 
+## Visit counter
+
+GitHub Pages has no server of its own, so the counter uses [GoatCounter](https://www.goatcounter.com), a free, cookie-free analytics service for non-commercial sites. The site code is set in `index.html` as `GOATCOUNTER_CODE` (currently `kzleong`, giving `kzleong.goatcounter.com`). Set it to an empty string to switch the counter off.
+
+For the number to show in the footer, the public counter must be switched on in GoatCounter:
+
+1. Sign in at `kzleong.goatcounter.com` and open **Settings** from the top menu.
+2. Scroll down and tick **Allow adding visitor counts on your website**, then save. It is off by default.
+
+The footer then shows the total page views. Visits from `localhost` are not counted, and some ad blockers block GoatCounter, so the figure can read slightly low. The GoatCounter dashboard gives a fuller breakdown by day and page.
+
 ## Credits
 
+- Built by [Kai Zhe Leong](https://www.linkedin.com/in/kzleong/), with Claude (Anthropic).
 - Route map: Penang Amateur Athletic Association, "Round the Island Relay Route".
 - Course data: Garmin Connect.
