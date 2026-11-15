@@ -10,6 +10,7 @@ There is no build step, framework or server. The whole site is one static HTML f
 | --- | --- |
 | `index.html` | The site. HTML, CSS and JavaScript in one file, with the route data embedded. |
 | `route-map.jpg` | Official route map from the Penang Amateur Athletic Association, shown at the bottom of the page. |
+| `routes.zip` | The 12 source GPX files exported from Garmin Connect, one per baton, named `COURSE_<id>.gpx`. The id is the number at the end of the matching Garmin course link. |
 | `route-metrics.csv` | Summary metrics for each baton (distance, gain, loss, elevation range, difficulty, effort score, rank, Garmin link). |
 | `README.md` | This file. |
 
@@ -47,7 +48,7 @@ effort index = distance (km) + ascent (m) / 100 + descent (m) / 200
 | Moderate | 5.51 to 7.50 |
 | Hard | above 7.50 |
 
-Ascent and descent are estimated from the GPX elevation samples. A rise or fall is only counted once it adds up to more than 2 m since the last turning point, so GPS noise is ignored but gentle, sustained slopes are kept. (An earlier version ignored any change under 1 m between neighbouring points, which discarded most gradual climbing and undercounted both figures.) Distance is calculated from consecutive track coordinates using the haversine formula. Minimum and maximum elevation are the raw GPX sample extremes.
+Ascent and descent are estimated from the GPX elevation samples in `routes.zip`. A rise or fall is only counted once it adds up to more than 2 m since the last turning point, so GPS noise is ignored but gentle, sustained slopes are kept. (An earlier version ignored any change under 1 m between neighbouring points, which discarded most gradual climbing and undercounted both figures.) Distance is calculated from consecutive track coordinates using the haversine formula. Minimum and maximum elevation are the raw GPX sample extremes.
 
 As a check, Garmin Connect shows 63 m up and 41 m down for baton 1; this method gives 66 m and 43 m. Figures for other batons have not been checked against Garmin, so they may differ by a few metres.
 
@@ -55,12 +56,13 @@ Heat, surface, road crossings and how sustained a climb is will all affect how a
 
 ## Updating the data
 
-The route data comes from 12 Garmin Connect GPX exports, which are not stored in this repo. To change a route:
+The source data is the set of GPX files in `routes.zip`. Each file's track is named after its baton (for example "Baton 1"). To change a route:
 
-1. Export the new GPX from Garmin Connect and recompute the metrics using the method above (ascent and descent use the 2 m rule).
-2. Update the matching row in `route-metrics.csv`.
-3. Update the matching object in the `routes` array in `index.html`, including its `profile` points if the elevation changed.
-4. If rankings change, recompute `rank` across all 12 batons so the difficulty sort stays correct.
+1. Export the new GPX from Garmin Connect and replace the matching `COURSE_<id>.gpx` inside `routes.zip`.
+2. Recompute distance, ascent and descent using the method above (ascent and descent use the 2 m rule).
+3. Update the matching row in `route-metrics.csv`.
+4. Update the matching object in the `routes` array in `index.html`, including its `profile` points if the elevation changed.
+5. If rankings change, recompute `rank` across all 12 batons so the difficulty sort stays correct.
 
 `route-metrics.csv` and the `routes` array are maintained separately, so keep them in step.
 
@@ -77,7 +79,9 @@ For the number to show in the footer, the public counter must be switched on in 
 1. Sign in at `kzleong.goatcounter.com` and open **Settings** from the top menu.
 2. Scroll down and tick **Allow adding visitor counts on your website**, then save. It is off by default.
 
-The footer then shows the total page views. Visits from `localhost` are not counted, and some ad blockers block GoatCounter, so the figure can read slightly low. The GoatCounter dashboard gives a fuller breakdown by day and page.
+The footer then shows the total number of visits. GoatCounter counts a visit once per browser per 8 hours (it recognises a returning browser from a hash of the IP address and browser details), so refreshing the page yourself will not raise the number. The figure can also lag by up to about 30 minutes because GoatCounter caches it. Visits from `localhost` are not counted, and some ad blockers block GoatCounter, so the figure can read slightly low. The GoatCounter dashboard gives a fuller breakdown by day and page, including raw page views.
+
+If the footer shows nothing, open the browser console on the live site: a warning there says the counter could not be loaded and why.
 
 ## Credits
 
