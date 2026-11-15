@@ -31,7 +31,7 @@ Any other static host (Netlify, Cloudflare Pages, a plain web server) works the 
 - The `routes` array near the bottom of `index.html` holds one object per baton: distance, gain, loss, min and max elevation, effort score, difficulty, rank, Garmin course URL, and a down-sampled elevation profile.
 - The page renders the list from that array. The sort buttons reorder it by baton number, effort rank (easiest or hardest first), or distance.
 - The small line beside each baton is a sparkline drawn from the elevation profile. To remove it, delete the `spark(...)` call in the `render` function.
-- Start locations for each baton live in the `starts` object in the same script. They are transcribed from the official route map.
+- The "from → to" line and the start-point note under each baton come from the `legs` object in the same script. They are transcribed from the official route map and the official exchange-point table.
 
 ## How difficulty is estimated
 

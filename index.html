@@ -42,7 +42,10 @@ ol.batons{list-style:none;margin:0;padding:0;border-top:1px solid var(--ink)}
 .sort button:hover{color:var(--ink)}
 .sort button[aria-pressed="true"]{color:var(--ink);border-bottom-color:var(--ink)}
 .sort button:focus-visible,a:focus-visible{outline:2px solid var(--accent);outline-offset:3px}
-.start{margin:.15rem 0 0;font-size:.92rem}
+.route{margin:.2rem 0 0;font-size:.98rem}
+.route .arrow{margin:0 .35em;color:var(--muted)}
+.sr{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}
+.start{margin:.1rem 0 .15rem;font-size:.86rem;color:var(--muted)}
 .map{margin:3.5rem 0 0}
 .map h2{font:600 1rem var(--serif);margin:0 0 .75rem}
 .map img{display:block;width:100%;max-width:34rem;height:auto;border:1px solid var(--rule);background:#fff}
@@ -66,7 +69,7 @@ footer{margin-top:2.5rem;padding-top:1rem;border-top:1px solid var(--rule);font-
 <header>
   <p class="kicker">Route guide</p>
   <h1>Penang Round the Island Relay</h1>
-  <p class="lede">The twelve baton legs, with where each one starts. Each links to its course in Garmin Connect, and the list can be sorted by difficulty.</p>
+  <p class="lede">The twelve baton legs, each with its start and end points. Each links to its course in Garmin Connect, and the list can be sorted by difficulty.</p>
   <p class="summary" id="summary"></p>
 </header>
 
@@ -106,19 +109,19 @@ function spark(profile, label){
   return '<svg class="spark" viewBox="0 0 '+w+' '+h+'" role="img" aria-label="'+label+'"><polyline points="'+pts+'" fill="none" stroke="currentColor" stroke-width="1.25" stroke-linejoin="round"/></svg>';
 }
 
-const starts = {
-  1:'Esplanade (start and finish)',
-  2:'Gelugor, just after the IPG entrance',
-  3:'Bayan Lepas, opposite the Snake Temple',
-  4:'Sungai Batu, opposite the mosque',
-  5:'Balik Pulau, near the Hindu temple',
-  6:'Genting, opposite the playground',
-  7:'Sungai Rusa, opposite house no. A423',
-  8:'Sungai Pinang, Titi Kerawang',
-  9:'Teluk Bahang, at the dam',
-  10:'Batu Ferringhi, in front of Tunku\u2019s bungalow',
-  11:'Tanjung Bungah, 50 m before Boon Siew Villa',
-  12:'Tanjung Tokong, Marina Bay Apartment'
+const legs = {
+  1:  {from:'Esplanade',        to:'Gelugor',          note:'Race start'},
+  2:  {from:'Gelugor',          to:'Bayan Lepas',      note:'Starts just after the IPG entrance'},
+  3:  {from:'Bayan Lepas',      to:'Sungai Batu',      note:'Starts opposite the Snake Temple'},
+  4:  {from:'Sungai Batu',      to:'Balik Pulau',      note:'Starts opposite the mosque'},
+  5:  {from:'Balik Pulau',      to:'Genting',          note:'Starts near the Hindu temple'},
+  6:  {from:'Genting',          to:'Sungai Rusa',      note:'Starts opposite the playground'},
+  7:  {from:'Sungai Rusa',      to:'Sungai Pinang',    note:'Starts opposite house no. A423'},
+  8:  {from:'Sungai Pinang',    to:'Teluk Bahang',     note:'Starts at Titi Kerawang'},
+  9:  {from:'Teluk Bahang',     to:'Batu Ferringhi',   note:'Starts at the Teluk Bahang Dam'},
+  10: {from:'Batu Ferringhi',   to:'Tanjung Bungah',   note:'Starts in front of Tunku\u2019s bungalow'},
+  11: {from:'Tanjung Bungah',   to:'Tanjung Tokong',   note:'Starts 50 m before Boon Siew Villa'},
+  12: {from:'Tanjung Tokong',   to:'Esplanade',        note:'Starts at Marina Bay Apartment \u00b7 race finish'}
 };
 
 const total = routes.reduce((s, r) => s + r.distance_km, 0);
@@ -138,7 +141,8 @@ function render(){
     return '<li class="baton">'
       + '<div class="num">' + r.baton + '</div>'
       + '<div class="main"><h2>Baton ' + r.baton + '</h2>'
-      + '<p class="start">' + starts[r.baton] + '</p>'
+      + '<p class="route">' + legs[r.baton].from + '<span class="arrow" aria-hidden="true">\u2192</span><span class="sr"> to </span>' + legs[r.baton].to + '</p>'
+      + '<p class="start">' + legs[r.baton].note + '</p>'
       + '<p class="facts"><span>' + r.distance_km.toFixed(2) + ' km</span><span>' + r.gain_m + ' m up</span><span>' + r.loss_m + ' m down</span></p></div>'
       + '<div class="side"><span class="diff' + (r.difficulty === 'Hard' ? ' hard' : '') + '">' + r.difficulty + ' \u00b7 ' + r.score.toFixed(2) + '</span>'
       + '<a href="' + r.url + '" target="_blank" rel="noopener">Garmin course</a>'
