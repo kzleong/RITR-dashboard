@@ -1,4 +1,4 @@
-# Penang Round Island Relay: Baton Route Guide
+# Penang Round the Island Relay: Baton Route Guide
 
 A single-page guide to the 12 baton legs of the Penang Round the Island Relay. It lists each leg in running order with its start point, distance, climb and descent, an estimated difficulty rating, and a link to the original course in Garmin Connect. The list can be re-sorted by difficulty or distance.
 
@@ -47,7 +47,9 @@ effort index = distance (km) + ascent (m) / 100 + descent (m) / 200
 | Moderate | 5.51 to 7.50 |
 | Hard | above 7.50 |
 
-Ascent and descent are estimated from the GPX elevation samples. Samples are smoothed with a 5-point rolling median, and only changes greater than 1 m between adjacent smoothed samples are accumulated, which reduces GPS elevation noise. Distance is calculated from consecutive track coordinates using the haversine formula. Minimum and maximum elevation are the raw GPX sample extremes. Figures can differ from Garmin's own summaries.
+Ascent and descent are estimated from the GPX elevation samples. A rise or fall is only counted once it adds up to more than 2 m since the last turning point, so GPS noise is ignored but gentle, sustained slopes are kept. (An earlier version ignored any change under 1 m between neighbouring points, which discarded most gradual climbing and undercounted both figures.) Distance is calculated from consecutive track coordinates using the haversine formula. Minimum and maximum elevation are the raw GPX sample extremes.
+
+As a check, Garmin Connect shows 63 m up and 41 m down for baton 1; this method gives 66 m and 43 m. Figures for other batons have not been checked against Garmin, so they may differ by a few metres.
 
 Heat, surface, road crossings and how sustained a climb is will all affect how a leg feels, so check the Garmin course before running.
 
@@ -55,7 +57,7 @@ Heat, surface, road crossings and how sustained a climb is will all affect how a
 
 The route data comes from 12 Garmin Connect GPX exports, which are not stored in this repo. To change a route:
 
-1. Export the new GPX from Garmin Connect and recompute the metrics using the method above.
+1. Export the new GPX from Garmin Connect and recompute the metrics using the method above (ascent and descent use the 2 m rule).
 2. Update the matching row in `route-metrics.csv`.
 3. Update the matching object in the `routes` array in `index.html`, including its `profile` points if the elevation changed.
 4. If rankings change, recompute `rank` across all 12 batons so the difficulty sort stays correct.

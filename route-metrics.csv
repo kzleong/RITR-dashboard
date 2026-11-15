@@ -1,0 +1,13 @@
+baton,course_id,distance_km,gain_m,loss_m,min_elev_m,max_elev_m,difficulty,effort_score,easiest_to_hardest_rank,garmin_url
+1,239469098,7.69,66,43,-0.9,28.7,Hard,8.56,11,https://connect.garmin.com/modern/course/239469098
+2,239469223,7.71,38,59,0.6,23.7,Hard,8.38,10,https://connect.garmin.com/modern/course/239469223
+3,239469304,6.38,48,44,1.1,41.1,Moderate,7.08,7,https://connect.garmin.com/modern/course/239469304
+4,239469353,3.76,85,5,4.8,88.0,Easy,4.63,1,https://connect.garmin.com/modern/course/239469353
+5,239469377,3.73,39,119,10.9,129.5,Easy,4.71,2,https://connect.garmin.com/modern/course/239469377
+6,239469417,6.47,23,19,5.0,17.2,Moderate,6.79,5,https://connect.garmin.com/modern/course/239469417
+7,239469459,5.8,149,7,3.8,152.3,Moderate,7.33,9,https://connect.garmin.com/modern/course/239469459
+8,239469507,7.86,63,154,61.5,215.2,Hard,9.26,12,https://connect.garmin.com/modern/course/239469507
+9,239469547,5.11,25,68,7.2,64.0,Moderate,5.70,4,https://connect.garmin.com/modern/course/239469547
+10,239469578,6.41,50,54,1.7,33.0,Moderate,7.18,8,https://connect.garmin.com/modern/course/239469578
+11,239469619,6.58,29,29,2.7,24.5,Moderate,7.01,6,https://connect.garmin.com/modern/course/239469619
+12,239469663,5.35,22,25,0.2,11.6,Moderate,5.69,3,https://connect.garmin.com/modern/course/239469663
