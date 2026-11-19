@@ -85,6 +85,6 @@ If the footer shows nothing, open the browser console on the live site: a warnin
 
 ## Credits
 
-- Built by [Kai Zhe Leong](https://www.linkedin.com/in/kzleong/), with Claude (Anthropic).
+- Built by [Kai Zhe Leong](https://www.strava.com/athletes/40726632/), with Claude (Anthropic).
 - Route map: Penang Amateur Athletic Association, "Round the Island Relay Route".
 - Course data: Garmin Connect.

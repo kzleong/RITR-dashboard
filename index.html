@@ -100,7 +100,7 @@ footer p{margin:.25rem 0}
 </main>
 
 <footer>
-  <p>Built by <a href="https://www.linkedin.com/in/kzleong/" target="_blank" rel="noopener">Kai Zhe Leong</a>, with Claude, an AI assistant made by Anthropic.</p>
+  <p>Built by <a href="https://www.strava.com/athletes/40726632/" target="_blank" rel="noopener">Kai Zhe Leong</a>, with Claude, an AI assistant made by Anthropic.</p>
   <p id="visits" hidden></p>
 </footer>
 </div>
@@ -175,13 +175,13 @@ if (GOATCOUNTER_CODE) {
   tag.dataset.goatcounter = base + '/count';
   document.head.appendChild(tag);
   fetch(base + '/counter/TOTAL.json')
-    .then(r => r.ok ? r.json() : Promise.reject())
+    .then(r => r.ok ? r.json() : Promise.reject(new Error('HTTP ' + r.status)))
     .then(d => {
       const el = document.getElementById('visits');
-      el.textContent = d.count + ' page views';
+      el.textContent = d.count + ' visits';
       el.hidden = false;
     })
-    .catch(() => {});
+    .catch(err => console.warn('Visit counter unavailable (' + err.message + '). Check that "Allow adding visitor counts on your website" is ticked in GoatCounter settings.'));
 }
 </script>
 </body>
